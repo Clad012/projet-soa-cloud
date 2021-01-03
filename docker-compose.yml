@@ -1,0 +1,63 @@
+version: "3"
+services:
+  cloud-config:
+    build: cloud-config
+    ports:
+      - "9296:9296"
+    restart: always
+    volumes:
+      - ./cloud-config
+
+  service-registry:
+    build: service-registry
+    ports:
+      - "8761:8761"
+    volumes:
+      - ./service-registry
+    depends_on:
+      - cloud-config
+    restart: always
+
+  etudiant-service:
+    build: etudiant-service
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./etudiant-service
+    depends_on:
+      - cloud-config
+      - service-registry
+    restart: always
+
+  enseignant-service:
+    build: enseignant-service
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./enseignant-service
+    depends_on:
+      - cloud-config
+      - service-registry
+    restart: always
+
+  cadre-service:
+    build: cadre-service
+    ports:
+      - "8060:8060"
+    volumes:
+      - ./cadre-service
+    depends_on:
+      - cloud-config
+      - service-registry
+    restart: always
+
+  cloud-gateway:
+    build: cloud-gateway
+    ports:
+      - "80:8080"
+    volumes:
+      - ./cloud-gateway
+    depends_on:
+      - cloud-config
+      - service-registry
+    restart: always
