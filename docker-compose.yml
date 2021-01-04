@@ -7,6 +7,10 @@ services:
     restart: always
     volumes:
       - ./cloud-config
+    depends_on:
+      - service-registry
+    links:
+      - service-registry
 
   service-registry:
     build: service-registry
@@ -14,10 +18,6 @@ services:
       - "8761:8761"
     volumes:
       - ./service-registry
-    depends_on:
-      - cloud-config
-    links:
-      - cloud-config
     restart: always
 
   etudiant-service:
