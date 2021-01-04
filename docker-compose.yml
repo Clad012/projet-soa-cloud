@@ -7,6 +7,9 @@ services:
     restart: always
     volumes:
       - ./cloud-config
+    environment:
+      # Important for clients to register with eureka
+      - eureka.client.serviceUrl.defaultZone=http://registration:8761/eureka/
     depends_on:
       - service-registry
     links:
@@ -19,6 +22,7 @@ services:
     volumes:
       - ./service-registry
     restart: always
+    hostname: registration
 
   etudiant-service:
     build: etudiant-service
@@ -26,6 +30,9 @@ services:
       - "8090:8090"
     volumes:
       - ./etudiant-service
+    environment:
+    # Important for clients to register with eureka
+      - eureka.client.serviceUrl.defaultZone=http://registration:8761/eureka/
     depends_on:
       - cloud-config
       - service-registry
@@ -40,6 +47,9 @@ services:
       - "9000:9000"
     volumes:
       - ./enseignant-service
+    environment:
+      # Important for clients to register with eureka
+      - eureka.client.serviceUrl.defaultZone=http://registration:8761/eureka/
     depends_on:
       - cloud-config
       - service-registry
@@ -54,6 +64,9 @@ services:
       - "8060:8060"
     volumes:
       - ./cadre-service
+    environment:
+      # Important for clients to register with eureka
+      - eureka.client.serviceUrl.defaultZone=http://registration:8761/eureka/
     depends_on:
       - cloud-config
       - service-registry
@@ -68,6 +81,9 @@ services:
       - "8080:8080"
     volumes:
       - ./cloud-gateway
+    environment:
+      # Important for clients to register with eureka
+      - eureka.client.serviceUrl.defaultZone=http://registration:8761/eureka/
     depends_on:
       - cloud-config
       - service-registry
