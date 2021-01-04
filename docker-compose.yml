@@ -16,6 +16,8 @@ services:
       - ./service-registry
     depends_on:
       - cloud-config
+    links:
+      - cloud-config
     restart: always
 
   etudiant-service:
@@ -25,6 +27,9 @@ services:
     volumes:
       - ./etudiant-service
     depends_on:
+      - cloud-config
+      - service-registry
+    links:
       - cloud-config
       - service-registry
     restart: always
@@ -38,6 +43,9 @@ services:
     depends_on:
       - cloud-config
       - service-registry
+    links:
+      - cloud-config
+      - service-registry
     restart: always
 
   cadre-service:
@@ -47,6 +55,9 @@ services:
     volumes:
       - ./cadre-service
     depends_on:
+      - cloud-config
+      - service-registry
+    links:
       - cloud-config
       - service-registry
     restart: always
@@ -60,4 +71,13 @@ services:
     depends_on:
       - cloud-config
       - service-registry
+      - cadre-service
+      - etudiant-service
+      - enseignant-service
+    links:
+      - cloud-config
+      - service-registry
+      - cadre-service
+      - etudiant-service
+      - enseignant-service
     restart: always
