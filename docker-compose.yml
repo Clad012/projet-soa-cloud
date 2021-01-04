@@ -19,7 +19,6 @@ services:
     volumes:
       - ./service-registry
     restart: always
-    hostname: registration
 
   etudiant-service:
     build: etudiant-service
