@@ -1,5 +1,7 @@
 package com.projetsoacloud.etudiant.service;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.projetsoacloud.etudiant.entity.Resultat;
 import com.projetsoacloud.etudiant.entity.Statistique;
 import com.projetsoacloud.etudiant.repository.EtudiantRepository;
@@ -22,9 +24,9 @@ public class ResultatService {
 
     public Resultat saveResultat(Long etudiantId,Resultat resultat) {
         log.info("Inside saveResultat methode of ResultatService");
-        if(resultatRepository.existsByEtudiantIdAndAnneeScolaire(etudiantId, resultat.getAnneeScolaire()))
-            return updateResultat(etudiantId,resultat);
-        else
+        //if(resultatRepository.existsByEtudiantIdAndAnneeScolaire(etudiantId, resultat.getAnneeScolaire()))
+           // return updateResultat(etudiantId,resultat);
+        //else
             return etudiantRepository.findById(etudiantId)
                     .map(etudiant -> {
                         resultat.setEtudiant(etudiant);
@@ -86,8 +88,8 @@ public class ResultatService {
         return stats;
     }
 
-    /*public List<Statistique> topresultats(String anneeScolaire) {
-
-        return resultatRepository.topresultats(anneeScolaire);
-    }*/
+    public List<Resultat> topresultats(String anneeScolaire) {
+        log.info("Inside topresultats methode of ResultatService");
+        return resultatRepository.findTop10ByAnneeScolaireOrderByMoyenneDesc(anneeScolaire);
+    }
 }

@@ -15,7 +15,7 @@ public interface AbsenceRepository extends JpaRepository<Absence, Long> {
 
     List<Absence> findByEtudiantId(Long etudiantId);
 
-    boolean existsByEtudiantIdAndDate(Long etudiantId, Date date);
+    boolean existsByEtudiantIdAndDate(Long etudiantId, String date);
 
     @Query("SELECT " +
             "    new com.projetsoacloud.etudiant.entity.Statistique(a.anneeScolaire, COUNT(a.id)) " +
@@ -36,15 +36,13 @@ public interface AbsenceRepository extends JpaRepository<Absence, Long> {
             "    a.etudiant.classe ")
     List<Statistique> countByClasse(String anneeScolaire);
 
-    /*@Query("SELECT " +
-            "    new com.projetsoacloud.etudiant.entity.Statistique(CONCAT(e.prenom, ' ', e.nom), COUNT(a.id)) " +
+    @Query("SELECT " +
+            "    new com.projetsoacloud.etudiant.entity.Statistique(a.date, COUNT(a.id)) " +
             "FROM " +
-            "    Absence a, Enseignant e " +
-            "Where " +
+            "    Absence a " +
+            "WHERE " +
             "    a.anneeScolaire = ?1 " +
-            "AND " +
-            "    a.enseignantId = e.id " +
             "GROUP BY " +
-            "    a.etudiant.classe ")*/
-    List<Statistique> countByEnseignantId(String anneeScolaire);
+            "    a.date ")
+    List<Statistique> countByDate(String anneeScolaire);
 }

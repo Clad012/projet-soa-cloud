@@ -17,54 +17,60 @@ public class ResultatController {
     @Autowired
     private ResultatService resultatService;
 
+    @CrossOrigin
     @PostMapping("/{id}")
     public Resultat saveResultat(@PathVariable("id") Long etudiantId, @RequestBody Resultat resultat){
         log.info("Inside saveResultat methode of ResultatController");
         return resultatService.saveResultat(etudiantId,resultat);
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public List<Resultat> findResultatsByEtudiantId(@PathVariable("id") Long etudiantId){
         log.info("Inside findResultatsByEtudiantId methode of ResultatController");
         return resultatService.findResultatsByEtudiantId(etudiantId);
     }
 
-
+    @CrossOrigin
     @PutMapping("/{id}")
     public Resultat updateResultat(@PathVariable("id") Long id, @RequestBody Resultat resultat){
         log.info("Inside updateResultat methode of ResultatController");
         return resultatService.updateResultat(id, resultat);
     }
 
-
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public Long deleteResultat(@PathVariable("id") Long id){
         log.info("Inside deleteResultat methode of ResultatController");
         return resultatService.deleteResultat(id);
     }
 
+    @CrossOrigin
     @GetMapping("/statistiques/classe")
-    public List<Statistique> countAdmisByClasse(@RequestParam(name ="anneeScalaire") String anneeScolaire){
+    public List<Statistique> countAdmisByClasse(@RequestParam(name ="anneeScolaire") String anneeScolaire){
         log.info("Inside countAdmisByClasse methode of ResultatController");
         return resultatService.countAdmisByClasse(anneeScolaire);
     }
 
+    @CrossOrigin
     @GetMapping("/statistiques/sexe")
-    public List<Statistique> countAdmisBySexe(@RequestParam(name ="anneeScalaire") String anneeScolaire){
+    public List<Statistique> countAdmisBySexe(@RequestParam(name ="anneeScolaire") String anneeScolaire){
         log.info("Inside countAdmisBySexe methode of ResultatController");
         return resultatService.countAdmisBySexe(anneeScolaire);
     }
 
+    @CrossOrigin
     @GetMapping("/statistiques/anneeScolaire")
     public List<Statistique> countAdmisByAnneeScolaire(){
         log.info("Inside countAdmisByAnneeScolaire methode of ResultatController");
         return resultatService.countAdmisByAnneeScolaire();
     }
 
-    /*@GetMapping("/statistiques/top10")
-    public List<Statistique> topresultats(@RequestParam(name ="anneeScalaire") String anneeScolaire){
+    @CrossOrigin
+    @GetMapping("/statistiques/top10")
+    public List<Resultat> topresultats(@RequestParam(name ="anneeScolaire") String anneeScolaire){
         log.info("Inside topresultats methode of ResultatController");
         return resultatService.topresultats(anneeScolaire);
-    }*/
+    }
 
 }

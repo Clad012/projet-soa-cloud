@@ -1,14 +1,18 @@
 package com.projetsoacloud.etudiant.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,7 +31,7 @@ public class Etudiant extends AuditModel {
     private String prenom;
 
     @Column(name = "date_naissance")
-    private Date date_naissance;
+    private String date_naissance;
 
     @Column(name = "classe")
     private String classe;
@@ -38,9 +42,11 @@ public class Etudiant extends AuditModel {
     @Column(name = "email")
     private String email;
 
-    /*@OneToMany(mappedBy="etudiant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Resultat> resultats;
 
-    @OneToMany(mappedBy="etudiant", fetch = FetchType.LAZY)
-    private List<Resultat> absences;*/
+
+    @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Absence> absences;
 }

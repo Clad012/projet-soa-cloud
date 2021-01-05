@@ -1,5 +1,6 @@
 package com.projetsoacloud.etudiant.entity;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "resultat")
+
 public class Resultat extends AuditModel {
 
     @Id
@@ -21,7 +23,7 @@ public class Resultat extends AuditModel {
     private Long id;
 
     @Column(name = "moyenne")
-    private Long moyenne;
+    private Double moyenne;
 
     @Column(name = "annee_scolaire")
     private String anneeScolaire;

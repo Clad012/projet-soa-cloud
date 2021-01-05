@@ -27,7 +27,7 @@ public class Cadre {
     private String prenom;
 
     @Column(name = "date_naissance")
-    private Date date_naissance;
+    private String date_naissance;
 
     @Column(name = "poste")
     private String poste;

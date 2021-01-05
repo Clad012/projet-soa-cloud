@@ -16,12 +16,14 @@ public class EnseignantController {
     @Autowired
     private EnseignantService enseignantService;
 
+    @CrossOrigin
     @PostMapping("/")
     public Enseignant saveEnseignant(@RequestBody Enseignant enseignant){
         log.info("Inside saveEnseignant methode of EnseignantController");
         return enseignantService.saveEnseignant(enseignant);
     }
 
+    @CrossOrigin
     @GetMapping("/")
     public List<Enseignant> findEnseignants(@RequestParam(name ="grade" , defaultValue = "empty") String grade, @RequestParam(name ="sexe" , defaultValue = "empty") String sexe)
     {
@@ -33,21 +35,21 @@ public class EnseignantController {
             return enseignantService.findEnseignants();
     }
 
-
+    @CrossOrigin
     @GetMapping("/{id}")
     public Enseignant findEnseignantById(@PathVariable("id") Long id){
         log.info("Inside findEnseignantById methode of EnseignantController");
         return enseignantService.findEnseignantById(id);
     }
 
-
+    @CrossOrigin
     @PutMapping("/{id}")
     public Enseignant updateEnseignant(@PathVariable("id") Long id, @RequestBody Enseignant enseignant){
         log.info("Inside updateEnseignant methode of EnseignantController");
         return enseignantService.updateEnseignant(id, enseignant);
     }
 
-
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public Long deleteEnseignant(@PathVariable("id") Long id){
         log.info("Inside deleteEnseignant methode of EnseignantController");

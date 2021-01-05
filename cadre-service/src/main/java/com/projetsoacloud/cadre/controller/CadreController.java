@@ -16,12 +16,14 @@ public class CadreController {
     @Autowired
     private CadreService cadreService;
 
+    @CrossOrigin
     @PostMapping("/")
     public Cadre saveCadre(@RequestBody Cadre cadre){
         log.info("Inside saveCadre methode of CadreController");
         return cadreService.saveCadre(cadre);
     }
 
+    @CrossOrigin
     @GetMapping("/")
     public List<Cadre> findCadres(@RequestParam(name ="poste" , defaultValue = "empty") String poste, @RequestParam(name ="sexe" , defaultValue = "empty") String sexe)
     {
@@ -33,21 +35,21 @@ public class CadreController {
             return cadreService.findCadres();
     }
 
-
+    @CrossOrigin
     @GetMapping("/{id}")
     public Cadre findCadreById(@PathVariable("id") Long id){
         log.info("Inside findCadreById methode of CadreController");
         return cadreService.findCadreById(id);
     }
 
-
+    @CrossOrigin
     @PutMapping("/{id}")
     public Cadre updateCadre(@PathVariable("id") Long id,@RequestBody Cadre cadre){
         log.info("Inside updateCadre methode of CadreController");
         return cadreService.updateCadre(id, cadre);
     }
 
-
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public Long deleteCadre(@PathVariable("id") Long id){
         log.info("Inside deleteCadre methode of CadreController");

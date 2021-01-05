@@ -27,7 +27,7 @@ public class Enseignant {
     private String prenom;
 
     @Column(name = "date_naissance")
-    private Date date_naissance;
+    private String date_naissance;
 
     @Column(name = "grade")
     private String grade;

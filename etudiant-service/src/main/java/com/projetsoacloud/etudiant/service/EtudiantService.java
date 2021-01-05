@@ -1,6 +1,7 @@
 package com.projetsoacloud.etudiant.service;
 
 import com.projetsoacloud.etudiant.entity.Etudiant;
+import com.projetsoacloud.etudiant.repository.AbsenceRepository;
 import com.projetsoacloud.etudiant.repository.EtudiantRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class EtudiantService {
 
     @Autowired
     private EtudiantRepository etudiantRepository;
+
+    private AbsenceRepository absenceRepository;
 
     public Etudiant saveEtudiant(Etudiant etudiant) {
         log.info("Inside saveEtudiant methode of EtudiantService");

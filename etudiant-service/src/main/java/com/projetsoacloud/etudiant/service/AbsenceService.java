@@ -21,10 +21,10 @@ public class AbsenceService {
     private EtudiantRepository etudiantRepository;
 
     public Absence saveAbsence(Long etudiantId,Absence absence) {
-        log.info("Inside saveAbsence methode of RbsenceService");
-        if(absenceRepository.existsByEtudiantIdAndDate(etudiantId, absence.getDate()))
-            return updateAbsence(etudiantId,absence);
-        else
+        log.info("Saving Absence in Absence Service");
+        //if(absenceRepository.existsByEtudiantIdAndDate(etudiantId, absence.getDate()))
+           // return updateAbsence(etudiantId,absence);
+        //else
             return etudiantRepository.findById(etudiantId)
                     .map(etudiant -> {
                         absence.setEtudiant(etudiant);
@@ -63,8 +63,8 @@ public class AbsenceService {
         return absenceRepository.countByClasse(anneeScolaire);
     }
 
-    public List<Statistique> countByEnseignantId(String anneeScolaire){
-        log.info("Inside countByEnseignantId methode of AbsenceService");
-        return absenceRepository.countByEnseignantId(anneeScolaire);
+    public List<Statistique> countByDate(String anneeScolaire){
+        log.info("Inside countByDate methode of AbsenceService");
+        return absenceRepository.countByDate(anneeScolaire);
     }
 }
