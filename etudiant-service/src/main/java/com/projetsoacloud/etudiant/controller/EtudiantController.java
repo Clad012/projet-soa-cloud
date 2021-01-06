@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/etudiants")
 @Slf4j
@@ -17,14 +16,12 @@ public class EtudiantController {
     @Autowired
     private EtudiantService etudiantService;
 
-    @CrossOrigin
     @PostMapping("/")
     public Etudiant saveEtudiant(@RequestBody Etudiant etudiant){
         log.info("Inside saveEtudiant methode of EtudiantController");
         return etudiantService.saveEtudiant(etudiant);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/")
     public List<Etudiant> findEtudiants(@RequestParam(name ="classe" , defaultValue = "empty") String classe, @RequestParam(name ="sexe" , defaultValue = "empty") String sexe)
     {
@@ -36,21 +33,18 @@ public class EtudiantController {
             return etudiantService.findEtudiants();
     }
 
-    @CrossOrigin
     @GetMapping("/{id}")
     public Etudiant findEtudiantById(@PathVariable("id") Long id){
         log.info("Inside findEtudiantById methode of EtudiantController");
         return etudiantService.findEtudiantById(id);
     }
 
-    @CrossOrigin
     @PutMapping("/{id}")
     public Etudiant updateEtudiant(@PathVariable("id") Long id, @RequestBody Etudiant etudiant){
         log.info("Inside updateEtudiant methode of EtudiantController");
         return etudiantService.updateEtudiant(id, etudiant);
     }
 
-    @CrossOrigin
     @DeleteMapping("/{id}")
     public Long deleteEtudiant(@PathVariable("id") Long id){
         log.info("Inside deleteEtudiant methode of EtudiantController");
