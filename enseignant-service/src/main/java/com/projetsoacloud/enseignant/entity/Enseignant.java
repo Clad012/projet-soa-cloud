@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "enseignant")
-public class Enseignant {
+public class Enseignant extends AuditModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
